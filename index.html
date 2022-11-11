@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <title>Demo Page for Betsson</title>
   <!--Placing the embed script in the page for us to able to load the bot inside of an iframe without timing out-->
-  <script id="__ada" data-handle="betsson" src="https://static.ada.support/embed2.js"></script>
+  <script id="__ada" data-handle="zd-clean-abi1" src="https://static.ada.support/embed2.js"></script>
 
   <!--Hiding the origingal bot button-->
   <style type="text/css">
@@ -45,13 +45,12 @@
   <script type="text/javascript">
     function openChat() {
       //conditionally loading the bot based on the selected Topic
-      if (["ada-topic-1","ada-topic-2","ada-topic-3"].includes(document.getElementById("selected-topic").value)) {
+      if (["ada-topic-1", "ada-topic-2", "ada-topic-3"].includes(document.getElementById("selected-topic").value)) {
         console.log("Button Clicked");
         document.getElementById("chatter-form").style.display = "none"; // hiding the button so only the chat bot is visible
         document.getElementById("chabotIframe").style.display = "block";
         return false; // Making the div with the chat visi
-      }
-      else {
+      } else {
         console.log("Non ada topic");
       }
     }
