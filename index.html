@@ -3,68 +3,64 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Ada Test Environment</title>
-  <script id="__ada" data-handle="zd-clean-abi1" src="https://static.ada.support/embed2.js"></script>
+  <title>Demo Page for Betsson</title>
+  <!--Placing the embed script in the page for us to able to load the bot inside of an iframe without timing out-->
+  <script id="__ada" data-handle="betsson" src="https://static.ada.support/embed2.js"></script>
 
-  <style type="text/css">iframe#ada-button-frame{display: none}</style>
+  <!--Hiding the origingal bot button-->
+  <style type="text/css">
+    iframe#ada-button-frame {
+      display: none
+    }
+  </style>
 
 </head>
 
 <body>
+  <!--Linking the bot load to a form submit-->
+  <form id="chatter-form" onsubmit="return openChat();">
+    <br>
+    <label for="selected-topic">Topic : </label>
+    <select name="selected-topic" id="selected-topic">
+      <option value="ada-topic-1"> Ada Topic 1 </option>
+      <option value="ada-topic-2"> Ada Topic 2 </option>
+      <option value="ada-topic-3"> Ada Topic 3 </option>
+      <option value="non-ada-topic">Non Ada Topic 1 </option>
+      <option value="non-ada-topic">Non Ada Topic 2 </option>
+      <option value="non-ada-topic">Non Ada Topic 3 </option>
+    </select>
+    <br>
+    <br>
+    <input type="submit" />
+  </form>
 
-
-  <button onclick="openChat()">Chat</button>
-
-  <script type="text/javascript">
-    function openChat() {
-      console.log("Button Clicked");
-      window.adaEmbed.toggle();
+  <!--Overridng the parent element of the the chat frame to a new element using the id of the tag-->
+  <script>
+    window.adaSettings = {
+      parentElement: "chabotIframe"
     }
   </script>
 
-  <!--<script>
-      window.intercomSettings = {
-        api_base: "https://api-iam.intercom.io",
-        app_id: "x038cvn6"
-      };
-    </script>-->
+  <!--script to toggle the bot window on button click-->
+  <script type="text/javascript">
+    function openChat() {
+      //conditionally loading the bot based on the selected Topic
+      if (["ada-topic-1","ada-topic-2","ada-topic-3"].includes(document.getElementById("selected-topic").value)) {
+        console.log("Button Clicked");
+        document.getElementById("chatter-form").style.display = "none"; // hiding the button so only the chat bot is visible
+        document.getElementById("chabotIframe").style.display = "block";
+        return false; // Making the div with the chat visi
+      }
+      else {
+        console.log("Non ada topic");
+      }
+    }
+  </script>
 
-  <!--<script>
-      // We pre-filled your app ID in the widget URL: 'https://widget.intercom.io/widget/x038cvn6'
-      (function() {
-        var waa = window;
-        var ic = w.Intercom;
-        if (typeof ic === "function") {
-          ic('reattach_activator');
-          ic('update', w.intercomSettings);
-        } else {
-          var d = document;
-          var i = function() {
-            i.c(arguments);
-          };
-          i.q = [];
-          i.c = function(args) {
-            i.q.push(args);
-          };
-          w.Intercom = i;
-          var l = function() {
-            var s = d.createElement('script');
-            s.type = 'text/javascript';
-            s.async = true;
-            s.src = 'https://widget.intercom.io/widget/x038cvn6';
-            var x = d.getElementsByTagName('script')[0];
-            x.parentNode.insertBefore(s, x);
-          };
-          if (document.readyState === 'complete') {
-            l();
-          } else if (w.attachEvent) {
-            w.attachEvent('onload', l);
-          } else {
-            w.addEventListener('load', l, false);
-          }
-        }
-      })();
-    </script>-->
+  <!--New Parent Element of the bot-->
+  <div id="chabotIframe" style="height: 100vh; width:100%; display: none"></div>
+
+
 </body>
 
 </html>
